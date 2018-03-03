@@ -10,7 +10,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>HertfordshireMercury.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>HertfordshireMercury.iOS</AssemblyName>
+    <AssemblyName>Hertfordshire Mercury</AssemblyName>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
