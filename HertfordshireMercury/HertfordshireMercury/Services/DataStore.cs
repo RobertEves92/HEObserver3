@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using HertfordshireMercury.Models;
 
 using CodeHollow.FeedReader;
+using System.Net;
+using System.IO;
 
 [assembly: Xamarin.Forms.Dependency(typeof(HertfordshireMercury.Services.DataStore))]
 namespace HertfordshireMercury.Services
@@ -18,7 +20,20 @@ namespace HertfordshireMercury.Services
         {
             items = new List<Item>();
 
-            var feed = FeedReader.Read("https://gist.githubusercontent.com/RobertEves92/85e22fbe847fc4fb08e1aa28851e3bdd/raw/ba25f9d2a9ef44a17071f2507ca20726f3832f74/gistfile1.txt"); //gist containing test feed
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://gist.githubusercontent.com/RobertEves92/85e22fbe847fc4fb08e1aa28851e3bdd/raw/ba25f9d2a9ef44a17071f2507ca20726f3832f74/gistfile1.txt");
+            request.Method = "GET";
+            request.Timeout = 5000;//stop trying after 5s
+
+            WebResponse response = request.GetResponse();
+
+            StreamReader sr = new StreamReader(response.GetResponseStream(), System.Text.Encoding.UTF8);
+            string result = sr.ReadToEnd();
+            sr.Close();
+            response.Close();
+
+            var feed = FeedReader.ReadFromString(result);
+
+            //var feed = FeedReader.Read("https://gist.githubusercontent.com/RobertEves92/85e22fbe847fc4fb08e1aa28851e3bdd/raw/ba25f9d2a9ef44a17071f2507ca20726f3832f74/gistfile1.txt"); //gist containing test feed
 
             foreach (var item in feed.Items)
             {
