@@ -7,14 +7,14 @@ using HertfordshireMercury.Models;
 
 using CodeHollow.FeedReader;
 
-[assembly: Xamarin.Forms.Dependency(typeof(HertfordshireMercury.Services.MockDataStore))]
+[assembly: Xamarin.Forms.Dependency(typeof(HertfordshireMercury.Services.DataStore))]
 namespace HertfordshireMercury.Services
 {
-    public class MockDataStore : IDataStore<Item>
+    public class DataStore : IDataStore<Item>
     {
         List<Item> items;
 
-        public MockDataStore()
+        public DataStore()
         {
             items = new List<Item>();
 
