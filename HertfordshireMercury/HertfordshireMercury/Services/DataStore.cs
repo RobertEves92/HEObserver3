@@ -20,7 +20,12 @@ namespace HertfordshireMercury.Services
         {
             items = new List<Item>();
 
+#if DEBUG   //use static feed saved in gist for testing
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://gist.githubusercontent.com/RobertEves92/85e22fbe847fc4fb08e1aa28851e3bdd/raw/ba25f9d2a9ef44a17071f2507ca20726f3832f74/gistfile1.txt");
+#else       //use live feed from mercury for releases
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.hertfordshiremercury.co.uk/news/?service=rss");
+#endif
+
             request.Method = "GET";
             request.Timeout = 5000;//stop trying after 5s
 
@@ -32,8 +37,6 @@ namespace HertfordshireMercury.Services
             response.Close();
 
             var feed = FeedReader.ReadFromString(result);
-
-            //var feed = FeedReader.Read("https://gist.githubusercontent.com/RobertEves92/85e22fbe847fc4fb08e1aa28851e3bdd/raw/ba25f9d2a9ef44a17071f2507ca20726f3832f74/gistfile1.txt"); //gist containing test feed
 
             foreach (var item in feed.Items)
             {
