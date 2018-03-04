@@ -28,7 +28,8 @@ namespace HertfordshireMercury.Views
             {
                 Text = "Item 1",
                 Description = "This is an item description.",
-                DateTime = DateTime.Now
+                DateTime = DateTime.Now,
+                Author="A Person"
             };
 
             viewModel = new ItemDetailViewModel(item);

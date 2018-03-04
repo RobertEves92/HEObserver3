@@ -8,6 +8,8 @@
         <Label Text="{Binding Item.Text}" FontSize="Small"/>
         <Label Text="Published:" FontSize="Medium" />
         <Label Text="{Binding Item.DateTime}" FontSize="Small"/>
+        <Label Text="Author:" FontSize="Medium" />
+        <Label Text="{Binding Item.Author}" FontSize="Small"/>
         <Label Text="Description:" FontSize="Medium" />
         <Label Text="{Binding Item.Description}" FontSize="Small"/>
     </StackLayout>
