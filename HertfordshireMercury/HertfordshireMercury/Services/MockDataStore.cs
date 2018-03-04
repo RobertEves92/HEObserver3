@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 
 using HertfordshireMercury.Models;
 
+using CodeHollow.FeedReader;
+
 [assembly: Xamarin.Forms.Dependency(typeof(HertfordshireMercury.Services.MockDataStore))]
 namespace HertfordshireMercury.Services
 {
@@ -15,19 +17,12 @@ namespace HertfordshireMercury.Services
         public MockDataStore()
         {
             items = new List<Item>();
-            var mockItems = new List<Item>
-            {
-                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." },
-            };
 
-            foreach (var item in mockItems)
+            var feed = FeedReader.Read("https://gist.githubusercontent.com/RobertEves92/85e22fbe847fc4fb08e1aa28851e3bdd/raw/ba25f9d2a9ef44a17071f2507ca20726f3832f74/gistfile1.txt"); //gist containing test feed
+
+            foreach (var item in feed.Items)
             {
-                items.Add(item);
+                items.Add(new Item { Id = Guid.NewGuid().ToString(), Text = item.Title, Description = item.Description });
             }
         }
 
