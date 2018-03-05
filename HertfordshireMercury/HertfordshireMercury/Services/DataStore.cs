@@ -40,7 +40,7 @@ namespace HertfordshireMercury.Services
 
             foreach (var item in feed.Items)
             {
-                items.Add(new Item { Id = Guid.NewGuid().ToString(), Text = item.Description, Description = item.Title, DateTime=(DateTime)item.PublishingDate,Author=item.Author });
+                items.Add(new Item { Id = Guid.NewGuid().ToString(), Text = item.Description, Description = item.Title, DateTime=(DateTime)item.PublishingDate,Author=item.Author,Link=item.Link });
             }
         }
 

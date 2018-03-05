@@ -9,5 +9,6 @@ namespace HertfordshireMercury.Models
         public string Description { get; set; }
         public String Author { get; set; }
         public DateTime DateTime { get; set; }
+        public string Link { get; set; }
     }
 }

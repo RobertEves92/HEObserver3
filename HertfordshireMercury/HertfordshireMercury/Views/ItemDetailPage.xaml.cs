@@ -29,7 +29,8 @@ namespace HertfordshireMercury.Views
                 Text = "Item 1",
                 Description = "This is an item description.",
                 DateTime = DateTime.Now,
-                Author="A Person"
+                Author="A Person",
+                Link="http://google.co.uk"
             };
 
             viewModel = new ItemDetailViewModel(item);

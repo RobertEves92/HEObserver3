@@ -12,5 +12,7 @@
         <Label Text="{Binding Item.Author}" FontSize="Small"/>
         <Label Text="Description:" FontSize="Medium" />
         <Label Text="{Binding Item.Description}" FontSize="Small"/>
+        <Label Text="Link:" FontSize="Medium" />
+        <Label Text="{Binding Item.Link}" FontSize="Small"/>
     </StackLayout>
 </ContentPage>
