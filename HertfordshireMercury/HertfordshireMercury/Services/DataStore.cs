@@ -4,10 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using HertfordshireMercury.Models;
+using HertfordshireMercury.Services;
 
 using CodeHollow.FeedReader;
-using System.Net;
-using System.IO;
 
 [assembly: Xamarin.Forms.Dependency(typeof(HertfordshireMercury.Services.DataStore))]
 namespace HertfordshireMercury.Services
@@ -21,22 +20,10 @@ namespace HertfordshireMercury.Services
             items = new List<Item>();
 
 #if DEBUG   //use static feed saved in gist for testing
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://gist.githubusercontent.com/RobertEves92/85e22fbe847fc4fb08e1aa28851e3bdd/raw/ba25f9d2a9ef44a17071f2507ca20726f3832f74/gistfile1.txt");
+            var feed = FeedReader.ReadFromString(NetServices.GetWebpageFromUrl("https://gist.githubusercontent.com/RobertEves92/85e22fbe847fc4fb08e1aa28851e3bdd/raw/ba25f9d2a9ef44a17071f2507ca20726f3832f74/gistfile1.txt");
 #else       //use live feed from mercury for releases
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://www.hertfordshiremercury.co.uk/news/?service=rss");
+            var feed = FeedReader.ReadFromString(NetServices.GetWebpageFromUrl("https://www.hertfordshiremercury.co.uk/news/?service=rss");
 #endif
-
-            request.Method = "GET";
-            request.Timeout = 5000;//stop trying after 5s
-
-            WebResponse response = request.GetResponse();
-
-            StreamReader sr = new StreamReader(response.GetResponseStream(), System.Text.Encoding.UTF8);
-            string result = sr.ReadToEnd();
-            sr.Close();
-            response.Close();
-
-            var feed = FeedReader.ReadFromString(result);
 
             foreach (var item in feed.Items)
             {
