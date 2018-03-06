@@ -39,7 +39,7 @@ namespace HertfordshireMercury.Views
 
         private void ReadMore_Clicked(object sender, EventArgs e)
         {
-            Device.OpenUri(new Uri("https://www.hertfordshiremercury.co.uk"));
+            Device.OpenUri(new Uri(viewModel.Item.Link));
         }
     }
 }
