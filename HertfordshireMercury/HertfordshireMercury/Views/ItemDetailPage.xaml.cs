@@ -36,5 +36,10 @@ namespace HertfordshireMercury.Views
             viewModel = new ItemDetailViewModel(item);
             BindingContext = viewModel;
         }
+
+        private void ReadMore_Clicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
