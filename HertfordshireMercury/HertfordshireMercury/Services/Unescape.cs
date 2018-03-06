@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace HertfordshireMercury.Services
 {
@@ -12,28 +12,9 @@ namespace HertfordshireMercury.Services
         /// </summary>
         /// <param name="escaped">Escaped string to unescape</param>
         /// <returns>Unescaped string</returns>
-        public static string UnescapeHexCharacters(string escaped)
+        public static string UnescapeHtml(string escaped)
         {
-            string unescaped = escaped;
-            MatchCollection hexmatchs = Regex.Matches(escaped, "&#x[0-9][0-9];");
-
-            string[] unescapedMatches = new string[hexmatchs.Count];
-
-            for (int i = 0; i < hexmatchs.Count; i++)
-            {
-                string s = hexmatchs[i].Value;
-                s = s.Replace("&#x", "");
-                s = s.Replace(";", "");
-                s = Int16.Parse(s, System.Globalization.NumberStyles.AllowHexSpecifier).ToString();
-                unescapedMatches[i] = s;
-            }
-
-            for (int i = 0; i < hexmatchs.Count; i++)
-            {
-                unescaped = escaped.Replace(hexmatchs[i].Value, ((char)int.Parse(unescapedMatches[i])).ToString());
-            }
-
-            return unescaped;
+            return WebUtility.HtmlDecode(escaped);
         }
     }
 }
