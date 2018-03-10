@@ -25,13 +25,15 @@ namespace HertfordshireMercury.Services
             string feedUrl = "https://www.hertfordshiremercury.co.uk/news/?service=rss";
 #endif
             string feedSrc = NetServices.GetWebpageFromUrl(feedUrl);
+            feedSrc = Unescape.UnescapeHtml(feedSrc);
+
             var feed = FeedReader.ReadFromString(feedSrc);
 
-            Storage.SaveTextDoc(feedSrc, "feed.txt");            
+            Storage.SaveTextDoc(feedSrc, "feed.txt");
 
             foreach (var item in feed.Items)
             {
-                items.Add(new Item { Id = Guid.NewGuid().ToString(), Text = Unescape.UnescapeHtml(item.Description), Description = Unescape.UnescapeHtml(item.Title), DateTime = (DateTime)item.PublishingDate, Author = Unescape.UnescapeHtml(item.Author), Link = item.Link });
+                items.Add(new Item { Id = Guid.NewGuid().ToString(), Text = item.Description, Description = item.Title, DateTime = (DateTime)item.PublishingDate, Author = item.Author, Link = item.Link });
             }
         }
 
