@@ -7,15 +7,10 @@
         <ToolbarItem Text="Read More" Clicked="ReadMore_Clicked"/>
     </ContentPage.ToolbarItems>
     <StackLayout Spacing="20" Padding="15">
-        <Label Text="Text:" FontSize="Medium" />
-        <Label Text="{Binding Item.Text}" FontSize="Small"/>
-        <Label Text="Published:" FontSize="Medium" />
-        <Label Text="{Binding Item.DateTime}" FontSize="Small"/>
-        <Label Text="Author:" FontSize="Medium" />
-        <Label Text="{Binding Item.Author}" FontSize="Small"/>
+        <Label Text="{Binding Item.Text}" FontSize="Large"/>
+        <Label Text="{Binding Item.WrittenBy}" FontSize="Small"/>
+        <Label Text="{Binding Item.Published}" FontSize="Small"/>
         <Label Text="Description:" FontSize="Medium" />
         <Label Text="{Binding Item.Description}" FontSize="Small"/>
-        <Label Text="Link:" FontSize="Medium" />
-        <Label Text="{Binding Item.Link}" FontSize="Small"/>
     </StackLayout>
 </ContentPage>
