@@ -7,7 +7,7 @@ namespace HertfordshireMercury.Services
 {
     public static class Storage
     {
-        public static string StoragePath => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+        private static string StoragePath => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 
         public static void SaveTextDoc(string DocSource, string Path)
         {
