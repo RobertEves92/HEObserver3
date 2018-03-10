@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Xml;
+using System.IO;
 
 namespace HertfordshireMercury.Services
 {
@@ -9,11 +9,14 @@ namespace HertfordshireMercury.Services
     {
         public static string StoragePath => Environment.GetFolderPath(Environment.SpecialFolder.Personal);
 
-        public static void SaveXmlDoc(string DocSource, string Path)
+        public static void SaveTextDoc(string DocSource, string Path)
         {
-            XmlDocument xml = new XmlDocument();
-            xml.LoadXml(DocSource);
-            xml.Save(StoragePath + Path);
+            string savePath = $"{StoragePath}/{Path}";
+
+            TextWriter textWriter = new StreamWriter(savePath);
+            textWriter.WriteLine(DocSource);
+            textWriter.Flush();
+            textWriter.Close();
         }
     }
 }
