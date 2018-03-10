@@ -20,10 +20,14 @@ namespace HertfordshireMercury.Services
             items = new List<Item>();
 
 #if DEBUG   //use static feed saved in gist for testing
-            var feed = FeedReader.ReadFromString(NetServices.GetWebpageFromUrl("https://gist.githubusercontent.com/RobertEves92/85e22fbe847fc4fb08e1aa28851e3bdd/raw/ba25f9d2a9ef44a17071f2507ca20726f3832f74/gistfile1.txt"));
+            string feedUrl = "https://gist.githubusercontent.com/RobertEves92/85e22fbe847fc4fb08e1aa28851e3bdd/raw/ba25f9d2a9ef44a17071f2507ca20726f3832f74/gistfile1.txt";
 #else       //use live feed from mercury for releases
-            var feed = FeedReader.ReadFromString(NetServices.GetWebpageFromUrl("https://www.hertfordshiremercury.co.uk/news/?service=rss"));
+            string feedUrl = "https://www.hertfordshiremercury.co.uk/news/?service=rss";
 #endif
+            string feedSrc = NetServices.GetWebpageFromUrl(feedUrl);
+            var feed = FeedReader.ReadFromString(feedSrc);
+
+            Storage.SaveTextDoc(feedSrc, "feed.txt");            
 
             foreach (var item in feed.Items)
             {
