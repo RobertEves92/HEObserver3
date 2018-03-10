@@ -26,9 +26,9 @@ namespace HertfordshireMercury.Views
 
             var item = new Item
             {
-                Text = "Item 1",
+                Title = "Item 1",
                 Description = "This is an item description.",
-                DateTime = DateTime.Now,
+                PublishingDate = DateTime.Now,
                 Author="A Person",
                 Link="http://google.co.uk"
             };
