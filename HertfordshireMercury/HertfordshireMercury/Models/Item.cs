@@ -15,60 +15,69 @@ namespace HertfordshireMercury.Models
         {
             get
             {
-                string articleSrc = NetServices.GetWebpageFromUrl(Link);//download source
+                string articleText = "";
 
-                HtmlDocument doc = new HtmlDocument();
-                doc.LoadHtml(articleSrc);
-
-                List<HtmlNode> divList = new List<HtmlNode>();
-                foreach (HtmlNode div in doc.DocumentNode.SelectNodes("//div"))
+                try
                 {
-                    divList.Add(div);
-                }
+                    string articleSrc = NetServices.GetWebpageFromUrl(Link);//download source
 
-                HtmlNode articleBodyNode = null;
-                foreach (HtmlNode div in divList)
-                {
-                    foreach (HtmlAttribute a in div.Attributes)
+                    HtmlDocument doc = new HtmlDocument();
+                    doc.LoadHtml(articleSrc);
+
+                    List<HtmlNode> divList = new List<HtmlNode>();
+                    foreach (HtmlNode div in doc.DocumentNode.SelectNodes("//div"))
                     {
-                        if (a.Name == "class" && a.Value == "article-body")
+                        divList.Add(div);
+                    }
+
+                    HtmlNode articleBodyNode = null;
+                    foreach (HtmlNode div in divList)
+                    {
+                        foreach (HtmlAttribute a in div.Attributes)
                         {
-                            articleBodyNode = div;
+                            if (a.Name == "class" && a.Value == "article-body")
+                            {
+                                articleBodyNode = div;
+                                break;
+                            }
+                        }
+
+                        if (articleBodyNode != null)
                             break;
+                    }
+
+                    doc.LoadHtml(articleBodyNode.InnerHtml);
+                    List<HtmlNode> nodesToRemove = new List<HtmlNode>();
+                    foreach (HtmlNode node in doc.DocumentNode.DescendantNodes())
+                    {
+                        if (node.Name.ToLower() == "form" || node.Name.ToLower() == "aside")
+                        {
+                            nodesToRemove.Add(node);
                         }
                     }
 
-                    if (articleBodyNode != null)
-                        break;
-                }
-
-                doc.LoadHtml(articleBodyNode.InnerHtml);
-                List<HtmlNode> nodesToRemove = new List<HtmlNode>();
-                foreach (HtmlNode node in doc.DocumentNode.DescendantNodes())
-                {
-                    if (node.Name.ToLower() == "form" || node.Name.ToLower() == "aside")
+                    foreach (HtmlNode node in nodesToRemove)
                     {
-                        nodesToRemove.Add(node);
+                        doc.DocumentNode.RemoveChild(node, false);
                     }
-                }
 
-                foreach (HtmlNode node in nodesToRemove)
+                    articleText = doc.DocumentNode.InnerHtml;
+
+                    articleText = Regex.Replace(articleText, ".*?<\\/form>", "");
+
+                    articleText = Regex.Replace(articleText, "<a href.*?\">", "");
+                    articleText = articleText.Replace("</a>", "");
+
+                    articleText = Regex.Replace(articleText, "<\\/p>.*?<.*?>", "\r\n\r\n");
+
+                    articleText = Regex.Replace(articleText, "<.*?>", "");
+
+                    articleText = Unescape.UnescapeHtml(articleText);
+                }
+                catch(Exception e)
                 {
-                    doc.DocumentNode.RemoveChild(node, false);
+                    Android.Widget.Toast.MakeText(Android.App.Application.Context, e.ToString(), Android.Widget.ToastLength.Long).Show();
                 }
-
-                string articleText = doc.DocumentNode.InnerHtml;
-
-                articleText = Regex.Replace(articleText, ".*?<\\/form>", "");
-
-                articleText = Regex.Replace(articleText, "<a href.*?\">", "");
-                articleText = articleText.Replace("</a>", "");
-
-                articleText = Regex.Replace(articleText, "<\\/p>.*?<.*?>", "\r\n\r\n");
-
-                articleText = Regex.Replace(articleText, "<.*?>", "");
-
-                articleText = Unescape.UnescapeHtml(articleText);
 
                 return articleText;
             }
