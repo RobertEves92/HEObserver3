@@ -19,10 +19,10 @@ namespace HertfordshireMercury.Models
 
                 try
                 {
-                    string articleSrc = NetServices.GetWebpageFromUrl(Link);//download source
+                    //string articleSrc = NetServices.GetWebpageFromUrl(Link);//download source
 
                     HtmlDocument doc = new HtmlDocument();
-                    doc.LoadHtml(articleSrc);
+                    doc.LoadHtml("<html><head></head><body><div class=\"article-body\">blah blah blah</div></body></html>");
 
                     List<HtmlNode> divList = new List<HtmlNode>();
                     foreach (HtmlNode div in doc.DocumentNode.SelectNodes("//div"))
