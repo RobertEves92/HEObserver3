@@ -4,7 +4,7 @@
              x:Class="HertfordshireMercury.Views.ItemDetailPage"
              Title="{Binding Title}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Read More" Clicked="ReadMore_Clicked"/>
+        <ToolbarItem Text="View Site" Clicked="ReadMore_Clicked"/>
     </ContentPage.ToolbarItems>
     <ScrollView>
         <StackLayout Spacing="20" Padding="15">
