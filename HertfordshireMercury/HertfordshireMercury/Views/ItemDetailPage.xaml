@@ -10,7 +10,6 @@
         <Label Text="{Binding Item.Title}" FontSize="Large"/>
         <Label Text="{Binding Item.WrittenBy}" FontSize="Small"/>
         <Label Text="{Binding Item.Published}" FontSize="Small"/>
-        <Label Text="Description:" FontSize="Medium" />
-        <Label Text="{Binding Item.Description}" FontSize="Small"/>
+        <Label Text="{Binding Item.ArticleText}" FontSize="Medium"/>
     </StackLayout>
 </ContentPage>
