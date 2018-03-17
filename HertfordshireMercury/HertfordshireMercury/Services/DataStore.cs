@@ -4,30 +4,36 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using HertfordshireMercury.Models;
+using HertfordshireMercury.Services;
 
-[assembly: Xamarin.Forms.Dependency(typeof(HertfordshireMercury.Services.MockDataStore))]
+using CodeHollow.FeedReader;
+
+[assembly: Xamarin.Forms.Dependency(typeof(HertfordshireMercury.Services.DataStore))]
 namespace HertfordshireMercury.Services
 {
-    public class MockDataStore : IDataStore<Item>
+    public class DataStore : IDataStore<Item>
     {
         List<Item> items;
 
-        public MockDataStore()
+        public DataStore()
         {
             items = new List<Item>();
-            var mockItems = new List<Item>
-            {
-                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." },
-            };
 
-            foreach (var item in mockItems)
+#if DEBUG   //use static feed saved in gist for testing
+            string feedUrl = "https://gist.githubusercontent.com/RobertEves92/85e22fbe847fc4fb08e1aa28851e3bdd/raw/ba25f9d2a9ef44a17071f2507ca20726f3832f74/gistfile1.txt";
+#else       //use live feed from mercury for releases
+            string feedUrl = "https://www.hertfordshiremercury.co.uk/news/?service=rss";
+#endif
+            string feedSrc = NetServices.GetWebpageFromUrl(feedUrl);
+            feedSrc = Unescape.UnescapeHtml(feedSrc);
+
+            var feed = FeedReader.ReadFromString(feedSrc);
+
+            Storage.SaveTextDoc(feedSrc, "feed.txt");
+
+            foreach (var item in feed.Items)
             {
-                items.Add(item);
+                items.Add(new Item { Id = Guid.NewGuid().ToString(), Title = item.Title, Description = item.Description, PublishingDate = (DateTime)item.PublishingDate, Author = item.Author, Link = item.Link });
             }
         }
 

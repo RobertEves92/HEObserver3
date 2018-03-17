@@ -10,7 +10,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>HertfordshireMercury.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>HertfordshireMercury.iOS</AssemblyName>
+    <AssemblyName>HertfordshireMercury</AssemblyName>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -119,6 +119,9 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="CodeHollow.FeedReader">
+      <Version>1.1.1</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
   </ItemGroup>
   <ItemGroup>

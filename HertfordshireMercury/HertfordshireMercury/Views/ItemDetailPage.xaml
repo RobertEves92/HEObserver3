@@ -3,10 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HertfordshireMercury.Views.ItemDetailPage"
              Title="{Binding Title}">
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="Text:" FontSize="Medium" />
-        <Label Text="{Binding Item.Text}" FontSize="Small"/>
-        <Label Text="Description:" FontSize="Medium" />
-        <Label Text="{Binding Item.Description}" FontSize="Small"/>
-    </StackLayout>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="View Site" Clicked="ReadMore_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <StackLayout Spacing="20" Padding="15">
+            <Label Text="{Binding Item.Title}" FontSize="Large"/>
+            <Label Text="{Binding Item.WrittenBy}" FontSize="Small"/>
+            <Label Text="{Binding Item.Published}" FontSize="Small"/>
+            <Label Text="{Binding Item.ArticleText}" FontSize="Medium"/>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

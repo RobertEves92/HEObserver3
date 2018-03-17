@@ -26,12 +26,20 @@ namespace HertfordshireMercury.Views
 
             var item = new Item
             {
-                Text = "Item 1",
-                Description = "This is an item description."
+                Title = "Item 1",
+                Description = "This is an item description.",
+                PublishingDate = DateTime.Now,
+                Author="A Person",
+                Link="http://google.co.uk"
             };
 
             viewModel = new ItemDetailViewModel(item);
             BindingContext = viewModel;
+        }
+
+        private void ReadMore_Clicked(object sender, EventArgs e)
+        {
+            Device.OpenUri(new Uri(viewModel.Item.Link));
         }
     }
 }
