@@ -41,5 +41,10 @@ namespace HertfordshireMercury.Views
         {
             Device.OpenUri(new Uri(viewModel.Item.Link));
         }
+
+        private void Share_Clicked(object sender,EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
