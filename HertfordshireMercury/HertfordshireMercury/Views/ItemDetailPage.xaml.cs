@@ -49,7 +49,10 @@ namespace HertfordshireMercury.Views
 
         private void Share_Clicked(object sender,EventArgs e)
         {
-            throw new NotImplementedException();
+            if (CrossShare.IsSupported)
+                CrossShare.Current.Share(new Plugin.Share.Abstractions.ShareMessage { Title = viewModel.Item.Title, Text = viewModel.Item.Description, Url = viewModel.Item.Link });
+            else
+                throw new Exception("CrossShare not supported");
         }
     }
 }
