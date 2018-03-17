@@ -6,6 +6,8 @@ using Xamarin.Forms.Xaml;
 using HertfordshireMercury.Models;
 using HertfordshireMercury.ViewModels;
 
+using Plugin.Share;
+
 namespace HertfordshireMercury.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
@@ -39,7 +41,10 @@ namespace HertfordshireMercury.Views
 
         private void ReadMore_Clicked(object sender, EventArgs e)
         {
-            Device.OpenUri(new Uri(viewModel.Item.Link));
+            if (CrossShare.IsSupported)
+                CrossShare.Current.OpenBrowser(viewModel.Item.Link);
+            else
+                Device.OpenUri(new Uri(viewModel.Item.Link));
         }
 
         private void Share_Clicked(object sender,EventArgs e)
