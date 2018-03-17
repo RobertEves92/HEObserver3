@@ -29,8 +29,6 @@ namespace HertfordshireMercury.Services
 
             var feed = FeedReader.ReadFromString(feedSrc);
 
-            Storage.SaveTextDoc(feedSrc, "feed.txt");
-
             foreach (var item in feed.Items)
             {
                 items.Add(new Item { Id = Guid.NewGuid().ToString(), Title = item.Title, Description = item.Description, PublishingDate = (DateTime)item.PublishingDate, Author = item.Author, Link = item.Link });
