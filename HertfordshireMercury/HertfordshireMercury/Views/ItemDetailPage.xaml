@@ -4,6 +4,7 @@
              x:Class="HertfordshireMercury.Views.ItemDetailPage"
              Title="{Binding Title}">
     <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Share" Clicked="Share_Clicked"/>
         <ToolbarItem Text="View Site" Clicked="ReadMore_Clicked"/>
     </ContentPage.ToolbarItems>
     <ScrollView>

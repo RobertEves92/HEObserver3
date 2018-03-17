@@ -18,23 +18,6 @@ namespace HertfordshireMercury.Services
         public DataStore()
         {
             items = new List<Item>();
-
-#if DEBUG   //use static feed saved in gist for testing
-            string feedUrl = "https://gist.githubusercontent.com/RobertEves92/85e22fbe847fc4fb08e1aa28851e3bdd/raw/ba25f9d2a9ef44a17071f2507ca20726f3832f74/gistfile1.txt";
-#else       //use live feed from mercury for releases
-            string feedUrl = "https://www.hertfordshiremercury.co.uk/news/?service=rss";
-#endif
-            string feedSrc = NetServices.GetWebpageFromUrl(feedUrl);
-            feedSrc = Unescape.UnescapeHtml(feedSrc);
-
-            var feed = FeedReader.ReadFromString(feedSrc);
-
-            Storage.SaveTextDoc(feedSrc, "feed.txt");
-
-            foreach (var item in feed.Items)
-            {
-                items.Add(new Item { Id = Guid.NewGuid().ToString(), Title = item.Title, Description = item.Description, PublishingDate = (DateTime)item.PublishingDate, Author = item.Author, Link = item.Link });
-            }
         }
 
         public async Task<bool> AddItemAsync(Item item)
@@ -68,6 +51,20 @@ namespace HertfordshireMercury.Services
 
         public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
         {
+#if DEBUG   //use static feed saved in gist for testing
+            string feedUrl = "https://gist.githubusercontent.com/RobertEves92/85e22fbe847fc4fb08e1aa28851e3bdd/raw/ba25f9d2a9ef44a17071f2507ca20726f3832f74/gistfile1.txt";
+#else       //use live feed from mercury for releases
+            string feedUrl = "https://www.hertfordshiremercury.co.uk/news/?service=rss";
+#endif
+            string feedSrc = NetServices.GetWebpageFromUrl(feedUrl);
+            feedSrc = Unescape.UnescapeHtml(feedSrc);
+
+            var feed = FeedReader.ReadFromString(feedSrc);
+
+            foreach (var item in feed.Items)
+            {
+                items.Add(new Item { Id = Guid.NewGuid().ToString(), Title = item.Title, Description = item.Description, PublishingDate = (DateTime)item.PublishingDate, Author = item.Author, Link = item.Link });
+            }
             return await Task.FromResult(items);
         }
     }
