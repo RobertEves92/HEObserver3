@@ -19,6 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\IDataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\DataStore.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\NetServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Regexes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Unescape.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AboutViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BaseViewModel.cs" />
