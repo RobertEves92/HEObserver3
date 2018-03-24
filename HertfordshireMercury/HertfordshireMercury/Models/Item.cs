@@ -76,6 +76,10 @@ namespace HertfordshireMercury.Models
 
                 articleText = Regex.Replace(articleText, "<\\/p>.*?<.*?>", "\r\n\r\n");
 
+                articleText = Regex.Replace(articleText, "<button.*?</button>", "");
+                articleText = Regex.Replace(articleText, "<h\\d.*?</h\\d>", "");
+                articleText = articleText.Replace("poll loading", "");
+
                 articleText = Regex.Replace(articleText, "<.*?>", "");
 
                 articleText = Unescape.UnescapeHtml(articleText);
