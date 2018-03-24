@@ -55,7 +55,16 @@ namespace HertfordshireMercury.Models
 
                 foreach (HtmlNode node in nodesToRemove)
                 {
-                    doc.DocumentNode.RemoveChild(node, false);
+                    try
+                    {
+                        doc.DocumentNode.RemoveChild(node, false);
+                    }
+                    catch(Exception e)
+                    {
+#if DEBUG
+                        System.Diagnostics.Debug.WriteLine(e.ToString());
+#endif
+                    }
                 }
 
                 articleText = doc.DocumentNode.InnerHtml;
@@ -64,12 +73,25 @@ namespace HertfordshireMercury.Models
 
                 articleText = Regex.Replace(articleText, "<a href.*?\">", "");
                 articleText = articleText.Replace("</a>", "");
+                articleText = Regex.Replace(articleText, "<a class=\\\"gallery-interaction.*?>", "");
 
                 articleText = Regex.Replace(articleText, "<\\/p>.*?<.*?>", "\r\n\r\n");
+
+                articleText = Regex.Replace(articleText, "<button.*?</button>", "");
+                articleText = Regex.Replace(articleText, "<h\\d.*?</h\\d>", "");
+                articleText = articleText.Replace("poll loading", "");
+
+                articleText = Regex.Replace(articleText, "<img.*?>", "");
+                articleText = Regex.Replace(articleText, "<span class=\\\"label.*?</span>", "");
+                articleText = Regex.Replace(articleText, "<span>.*?</span>", "");
 
                 articleText = Regex.Replace(articleText, "<.*?>", "");
 
                 articleText = Unescape.UnescapeHtml(articleText);
+
+                articleText = Regex.Replace(articleText, @"Video Loading\s+Video Unavailable\s+Click to play\s+Tap to play\s+The video will start in\s+Cancel\s+Play now", "");
+
+                articleText = Regex.Replace(articleText, @"\s\s+", "\r\n\r\n");
 
                 return articleText;
             }
