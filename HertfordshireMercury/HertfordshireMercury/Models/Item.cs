@@ -69,29 +69,29 @@ namespace HertfordshireMercury.Models
 
                 articleText = doc.DocumentNode.InnerHtml;
 
-                articleText = Regex.Replace(articleText, ".*?<\\/form>", "");
+                articleText = Regexes.forms.Replace(articleText, "");
 
-                articleText = Regex.Replace(articleText, "<a href.*?\">", "");
+                articleText = Regexes.hyperlinks.Replace(articleText, "");
                 articleText = articleText.Replace("</a>", "");
-                articleText = Regex.Replace(articleText, "<a class=\\\"gallery-interaction.*?>", "");
+                articleText = Regexes.gallery.Replace(articleText, "");
 
-                articleText = Regex.Replace(articleText, "<\\/p>.*?<.*?>", "\r\n\r\n");
+                articleText = Regexes.paragraphs.Replace(articleText, "\r\n\r\n");
 
-                articleText = Regex.Replace(articleText, "<button.*?</button>", "");
-                articleText = Regex.Replace(articleText, "<h\\d.*?</h\\d>", "");
+                articleText = Regexes.button.Replace(articleText, "");
+                articleText = Regexes.headers.Replace(articleText, "");
                 articleText = articleText.Replace("poll loading", "");
 
-                articleText = Regex.Replace(articleText, "<img.*?>", "");
-                articleText = Regex.Replace(articleText, "<span class=\\\"label.*?</span>", "");
-                articleText = Regex.Replace(articleText, "<span>.*?</span>", "");
+                articleText = Regexes.images.Replace(articleText, "");
+                articleText = Regexes.labels.Replace(articleText, "");
+                articleText = Regexes.spans.Replace(articleText, "");
 
-                articleText = Regex.Replace(articleText, "<.*?>", "");
+                articleText = Regexes.tags.Replace(articleText, "");
 
                 articleText = Unescape.UnescapeHtml(articleText);
 
-                articleText = Regex.Replace(articleText, @"Video Loading\s+Video Unavailable\s+Click to play\s+Tap to play\s+The video will start in\s+Cancel\s+Play now", "");
+                articleText = Regexes.video.Replace(articleText, "");
 
-                articleText = Regex.Replace(articleText, @"\s\s+", "\r\n\r\n");
+                articleText = Regexes.whitespace.Replace(articleText, "\r\n\r\n");
 
                 return articleText;
             }
