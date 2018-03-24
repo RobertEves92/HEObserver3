@@ -69,29 +69,29 @@ namespace HertfordshireMercury.Models
 
                 articleText = doc.DocumentNode.InnerHtml;
 
-                articleText = Regexes.forms.Replace(articleText, "");
+                articleText = Regexes.FormTag.Replace(articleText, "");
 
-                articleText = Regexes.hyperlinks.Replace(articleText, "");
+                articleText = Regexes.Hyperlinks.Replace(articleText, "");
                 articleText = articleText.Replace("</a>", "");
-                articleText = Regexes.gallery.Replace(articleText, "");
+                articleText = Regexes.Gallery.Replace(articleText, "");
 
-                articleText = Regexes.paragraphs.Replace(articleText, "\r\n\r\n");
+                articleText = Regexes.Paragraphs.Replace(articleText, "\r\n\r\n");
 
-                articleText = Regexes.button.Replace(articleText, "");
-                articleText = Regexes.headers.Replace(articleText, "");
+                articleText = Regexes.Button.Replace(articleText, "");
+                articleText = Regexes.Headers.Replace(articleText, "");
                 articleText = articleText.Replace("poll loading", "");
 
-                articleText = Regexes.images.Replace(articleText, "");
-                articleText = Regexes.labels.Replace(articleText, "");
-                articleText = Regexes.spans.Replace(articleText, "");
+                articleText = Regexes.Images.Replace(articleText, "");
+                articleText = Regexes.Labels.Replace(articleText, "");
+                articleText = Regexes.Spans.Replace(articleText, "");
 
-                articleText = Regexes.tags.Replace(articleText, "");
+                articleText = Regexes.Tags.Replace(articleText, "");
 
                 articleText = Unescape.UnescapeHtml(articleText);
 
-                articleText = Regexes.video.Replace(articleText, "");
+                articleText = Regexes.Video.Replace(articleText, "");
 
-                articleText = Regexes.whitespace.Replace(articleText, "\r\n\r\n");
+                articleText = Regexes.Whitespace.Replace(articleText, "\r\n\r\n");
 
                 return articleText;
             }

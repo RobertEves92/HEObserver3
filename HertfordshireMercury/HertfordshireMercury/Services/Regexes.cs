@@ -7,27 +7,26 @@ namespace HertfordshireMercury.Services
 {
     public static class Regexes
     {
-        public static Regex forms = new Regex(".*?<\\/form>", RegexOptions.Compiled);
+        public static Regex FormTag = new Regex(".*?<\\/form>", RegexOptions.Compiled); //matches all text from start and form close tag
 
-        public static Regex hyperlinks = new Regex("<a href.*?\">", RegexOptions.Compiled);
+        public static Regex Hyperlinks = new Regex("<a href.*?\">", RegexOptions.Compiled); //matches all hyperlink open tags
 
-        public static Regex gallery = new Regex("<a class=\\\"gallery-interaction.*?>", RegexOptions.Compiled);
+        public static Regex Gallery = new Regex("<a class=\\\"gallery-interaction.*?>", RegexOptions.Compiled); //matches entire gallery sections
 
-        public static Regex paragraphs = new Regex("<\\/p>.*?<.*?>", RegexOptions.Compiled);
+        public static Regex Paragraphs = new Regex("<\\/p>.*?<.*?>", RegexOptions.Compiled); //matches end of paragraph tags and anything up to and including the next html tag
 
-        public static Regex button = new Regex("<button.*?</button>", RegexOptions.Compiled);
-        public static Regex headers = new Regex("<h\\d.*?</h\\d>", RegexOptions.Compiled);
+        public static Regex Button = new Regex("<button.*?</button>", RegexOptions.Compiled); //matches entire poll button tags
+        public static Regex Headers = new Regex("<h\\d.*?</h\\d>", RegexOptions.Compiled); //matches header formatting tags - e.g. H3 H2 etc
 
 
-        public static Regex images = new Regex("<img.*?>", RegexOptions.Compiled);
-        public static Regex labels = new Regex("<span class=\\\"label.*?</span>", RegexOptions.Compiled);
-        public static Regex spans = new Regex("<span>.*?</span>", RegexOptions.Compiled);
+        public static Regex Images = new Regex("<img.*?>", RegexOptions.Compiled); //matches image tags
+        public static Regex Labels = new Regex("<span class=\\\"label.*?</span>", RegexOptions.Compiled); //matches span tags with class label
+        public static Regex Spans = new Regex("<span>.*?</span>", RegexOptions.Compiled); //matches other span tags
 
-        public static Regex tags = new Regex("<.*?>", RegexOptions.Compiled);
+        public static Regex Tags = new Regex("<.*?>", RegexOptions.Compiled); //matches anything basically resembling a html tag (starts with < and ends with > with anything inbetween
 
-        public static Regex video = new Regex(@"Video Loading\s+Video Unavailable\s+Click to play\s+Tap to play\s+The video will start in\s+Cancel\s+Play now", RegexOptions.Compiled);
+        public static Regex Video = new Regex(@"Video Loading\s+Video Unavailable\s+Click to play\s+Tap to play\s+The video will start in\s+Cancel\s+Play now", RegexOptions.Compiled); //matches leftover video text
 
-        public static Regex whitespace = new Regex(@"\s\s+", RegexOptions.Compiled);
-
+        public static Regex Whitespace = new Regex(@"\s\s+", RegexOptions.Compiled); //matches excessive whitespace
     }
 }
