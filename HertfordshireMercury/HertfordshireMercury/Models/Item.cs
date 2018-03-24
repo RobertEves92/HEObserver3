@@ -55,7 +55,16 @@ namespace HertfordshireMercury.Models
 
                 foreach (HtmlNode node in nodesToRemove)
                 {
-                    doc.DocumentNode.RemoveChild(node, false);
+                    try
+                    {
+                        doc.DocumentNode.RemoveChild(node, false);
+                    }
+                    catch(Exception e)
+                    {
+#if DEBUG
+                        System.Diagnostics.Debug.WriteLine(e.ToString());
+#endif
+                    }
                 }
 
                 articleText = doc.DocumentNode.InnerHtml;
