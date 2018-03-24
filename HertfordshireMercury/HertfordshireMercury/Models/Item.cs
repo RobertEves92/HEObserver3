@@ -89,6 +89,8 @@ namespace HertfordshireMercury.Models
 
                 articleText = Unescape.UnescapeHtml(articleText);
 
+                articleText = Regex.Replace(articleText, @"\s\s+", "\r\n\r\n");
+
                 return articleText;
             }
         }
