@@ -73,12 +73,17 @@ namespace HertfordshireMercury.Models
 
                 articleText = Regex.Replace(articleText, "<a href.*?\">", "");
                 articleText = articleText.Replace("</a>", "");
+                articleText = Regex.Replace(articleText, "<a class=\\\"gallery-interaction.*?>", "");
 
                 articleText = Regex.Replace(articleText, "<\\/p>.*?<.*?>", "\r\n\r\n");
 
                 articleText = Regex.Replace(articleText, "<button.*?</button>", "");
                 articleText = Regex.Replace(articleText, "<h\\d.*?</h\\d>", "");
                 articleText = articleText.Replace("poll loading", "");
+
+                articleText = Regex.Replace(articleText, "<img.*?>", "");
+                articleText = Regex.Replace(articleText, "<span class=\\\"label.*?</span>", "");
+                articleText = Regex.Replace(articleText, "<span>.*?</span>", "");
 
                 articleText = Regex.Replace(articleText, "<.*?>", "");
 
