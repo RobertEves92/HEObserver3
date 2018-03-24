@@ -89,6 +89,8 @@ namespace HertfordshireMercury.Models
 
                 articleText = Unescape.UnescapeHtml(articleText);
 
+                articleText = Regex.Replace(articleText, @"Video Loading\s+Video Unavailable\s+Click to play\s+Tap to play\s+The video will start in\s+Cancel\s+Play now", "");
+
                 articleText = Regex.Replace(articleText, @"\s\s+", "\r\n\r\n");
 
                 return articleText;
