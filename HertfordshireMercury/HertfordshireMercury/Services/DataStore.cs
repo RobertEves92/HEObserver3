@@ -63,8 +63,11 @@ namespace HertfordshireMercury.Services
 
             foreach (var item in feed.Items)
             {
-                items.Add(new Item { Id = Guid.NewGuid().ToString(), Title = item.Title, Description = item.Description, PublishingDate = (DateTime)item.PublishingDate, Author = item.Author, Link = item.Link });
+                items.Add(new Item { Id = Guid.NewGuid().ToString(), Title = item.Title, Description = item.Description, PublishingDate = (DateTime)item.PublishingDate, Author = item.Author, Link = item.Link});
             }
+
+            var keywords = System.Text.RegularExpressions.Regex.Matches(feedSrc, @"<media:keywords>.*></media:keywords>");
+
             return await Task.FromResult(items);
         }
     }
