@@ -65,13 +65,13 @@ namespace HertfordshireMercury.Services
             {
                 items.Add(new Item { Id = Guid.NewGuid().ToString(), Title = item.Title, Description = item.Description, PublishingDate = (DateTime)item.PublishingDate, Author = item.Author, Link = item.Link});
             }
-
             //add keywords after loading items
-            var keywords = System.Text.RegularExpressions.Regex.Matches(feedSrc, @"<media:keywords>.*></media:keywords>"); //TODO move to regexes as compiled
+            var keywords = Regexes.Keywords.Matches(feedSrc);
             for (int i = 0; i < keywords.Count; i++)
             {
                 items[i].KeyWords = keywords[i].Value;
             }
+
             return await Task.FromResult(items);
         }
     }
