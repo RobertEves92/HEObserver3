@@ -10,6 +10,49 @@ namespace HertfordshireMercury.Models
     {
         public string WrittenBy => "Written By: " + Author;
         public string Published => "Published: " + PublishingDate.ToString();
+        public string ArticleCatagories => "Catagories: " + KeyWords;
+        public string KeyWords
+        {
+            get
+            {
+                System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();
+
+                foreach (var cat in Categories)
+                {
+                    stringBuilder.Append(cat + ", ");
+                }
+
+                return stringBuilder.ToString();
+            }
+
+            set
+            {
+                try
+                {
+                    string itemKeywords = value;
+                    itemKeywords = itemKeywords.Replace("<media:keywords><![CDATA[", "");
+                    itemKeywords = itemKeywords.Replace("]]></media:keywords>", "");
+                    string[] cats = itemKeywords.Split(',');
+
+                    Categories = new List<string>();
+                    if (cats.Length == 1 && cats[0] == "")
+                    {
+                        Categories.Add("Uncatagorised");
+                    }
+                    else
+                    {
+                        foreach (var cat in cats)
+                        {
+                            Categories.Add(cat.Trim());
+                        }
+                    }
+                }
+                catch
+                {
+                    Categories.Add("Uncatagorised");
+                }
+            }
+        }
 
         public string ArticleText
         {

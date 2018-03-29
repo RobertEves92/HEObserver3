@@ -28,5 +28,7 @@ namespace HertfordshireMercury.Services
         public static Regex Video = new Regex(@"Video Loading\s+Video Unavailable\s+Click to play\s+Tap to play\s+The video will start in\s+Cancel\s+Play now", RegexOptions.Compiled); //matches leftover video text
 
         public static Regex Whitespace = new Regex(@"\s\s+", RegexOptions.Compiled); //matches excessive whitespace
+
+        public static Regex Keywords = new Regex(@"<media:keywords>.*></media:keywords>", RegexOptions.Compiled);//matches keywords from feed
     }
 }
