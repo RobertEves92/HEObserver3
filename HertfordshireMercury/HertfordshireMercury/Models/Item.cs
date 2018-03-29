@@ -10,6 +10,7 @@ namespace HertfordshireMercury.Models
     {
         public string WrittenBy => "Written By: " + Author;
         public string Published => "Published: " + PublishingDate.ToString();
+        public string ArticleCatagories => "Catagories: " + KeyWords;
         public string KeyWords
         {
             get
