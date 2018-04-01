@@ -88,7 +88,7 @@ namespace HertfordshireMercury.Models
 
                 doc.LoadHtml(articleBodyNode.InnerHtml);
                 List<HtmlNode> nodesToRemove = new List<HtmlNode>();
-                foreach (HtmlNode node in doc.DocumentNode.DescendantNodes())
+                foreach (HtmlNode node in doc.DocumentNode.Descendants())
                 {
                     if (node.Name.ToLower() == "form" || node.Name.ToLower() == "aside" || node.Name.ToLower() == "figure")
                     {
