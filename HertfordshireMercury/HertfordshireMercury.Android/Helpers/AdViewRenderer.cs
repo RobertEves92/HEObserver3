@@ -38,7 +38,7 @@ namespace HertfordshireMercury.Droid.Helpers
 
             adView.LayoutParameters = adParams;
 
-            adView.LoadAd(new AdRequest.Builder().Build());
+            adView.LoadAd(new AdRequest.Builder().AddTestDevice("D3A2A49D2D34B8178EDEA1914E77689B").Build());
 
             return adView;
         }
