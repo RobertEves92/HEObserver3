@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionName="0.1.1" package="com.roberteves.HertfordshireMercury.android" android:installLocation="auto" android:versionCode="2">
 	<uses-sdk android:minSdkVersion="15" />
-	<application android:label="Hertfordshire Mercury"></application>
+	<application android:label="Hertfordshire Mercury">
+    <activity android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:theme="@android:style/Theme.Translucent" />
+  </application>
 </manifest>
