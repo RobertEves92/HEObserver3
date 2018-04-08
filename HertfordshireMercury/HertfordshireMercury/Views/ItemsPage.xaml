@@ -35,7 +35,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <ads:AdControlView />
+            <ads:AdControlView AdUnitId="ca-app-pub-4100821384102775/8375457622" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
