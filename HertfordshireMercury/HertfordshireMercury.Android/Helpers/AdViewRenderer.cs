@@ -21,7 +21,6 @@ namespace HertfordshireMercury.Droid.Helpers
 {
     public class AdViewRenderer : ViewRenderer<Controls.AdControlView,AdView>
     {
-        string adUnitId = "ca-app-pub-4100821384102775/8375457622";
         AdSize adSize = AdSize.SmartBanner;
         AdView adView;
 
@@ -33,7 +32,7 @@ namespace HertfordshireMercury.Droid.Helpers
             adView = new AdView(Forms.Context);
 
             adView.AdSize = adSize;
-            adView.AdUnitId = adUnitId;
+            adView.AdUnitId = AdControlView.UnitId;
             var adParams = new LinearLayout.LayoutParams(LayoutParams.WrapContent, LayoutParams.WrapContent);
 
             adView.LayoutParameters = adParams;
